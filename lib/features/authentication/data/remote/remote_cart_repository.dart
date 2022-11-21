@@ -1,7 +1,7 @@
 import '../../../cart/domain/cart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class LocalCartRepository {
+abstract class RemoteCartRepository {
   Future<Cart> fetchCart();
 
   Stream<Cart> watchCart();
@@ -9,10 +9,8 @@ abstract class LocalCartRepository {
   Future<void> setCart(Cart cart);
 }
 
-final localCartRepositoryProvider = Provider<LocalCartRepository>((ref) {
+final localCartRepositoryProvider = Provider<RemoteCartRepository>((ref) {
   // * Override this in the main method
   throw UnimplementedError();
 });
-
-
-// TODO create repo and push it online
+//TODO: set the remote call for the repository 
