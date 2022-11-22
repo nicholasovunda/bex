@@ -12,7 +12,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
     required this.spacing,
     required this.rowMainAxisAlignment,
     required this.rowCrossAxisAlignment,
-    required this.columnMainAxisAlignment,
+    this.columnMainAxisAlignment,
     required this.columnCrossAxisAlignment,
   });
   final Widget startContent;
@@ -23,7 +23,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
   final double spacing;
   final MainAxisAlignment rowMainAxisAlignment;
   final CrossAxisAlignment rowCrossAxisAlignment;
-  final MainAxisAlignment columnMainAxisAlignment;
+  final MainAxisAlignment? columnMainAxisAlignment;
   final CrossAxisAlignment columnCrossAxisAlignment;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
           );
         } else {
           return Column(
-            mainAxisAlignment: columnMainAxisAlignment,
+            mainAxisAlignment: columnMainAxisAlignment!,
             crossAxisAlignment: columnCrossAxisAlignment,
             children: [
               startContent,

@@ -1,5 +1,9 @@
+import 'package:bex/constants/size.dart';
+import 'package:bex/widgets/responsive_center.dart';
+import 'package:bex/widgets/responsive_scrollable_cards.dart';
 import 'package:flutter/material.dart';
 
+import '../../../widgets/primary_button.dart';
 import '../domain/address.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -57,7 +61,62 @@ class _AddressScreenState extends State<AddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ResponsiveScrollableCard(
+      key: AddressScreen.scrollableKey,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AddressFormField(
+              formKeyField: AddressScreen.addressKey,
+              controller: _addressController,
+              labelText: 'Address',
+              keyboardType: TextInputType.streetAddress,
+              enabled: !_isLoading,
+            ),
+            gapH48,
+            AddressFormField(
+              formKeyField: AddressScreen.townCityKey,
+              controller: _cityController,
+              labelText: 'Town/City',
+              keyboardType: TextInputType.streetAddress,
+              enabled: !_isLoading,
+            ),
+            gapH8,
+            AddressFormField(
+              formKeyField: AddressScreen.stateKey,
+              controller: _stateController,
+              labelText: 'State',
+              keyboardType: TextInputType.streetAddress,
+              enabled: !_isLoading,
+            ),
+            gapH8,
+            AddressFormField(
+              formKeyField: AddressScreen.postalCodeKey,
+              controller: _postalCodeController,
+              labelText: 'Postal Code',
+              keyboardType: TextInputType.streetAddress,
+              enabled: !_isLoading,
+            ),
+            gapH8,
+            AddressFormField(
+              formKeyField: AddressScreen.countryKey,
+              controller: _countryController,
+              labelText: 'Country',
+              keyboardType: TextInputType.streetAddress,
+              enabled: !_isLoading,
+            ),
+            gapH8,
+            PrimaryButton(
+              text: 'Submit',
+              onPressed: _submit,
+              isLoading: _isLoading,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -84,6 +143,11 @@ class AddressFormField extends StatelessWidget {
         labelText: labelText,
         enabled: enabled,
       ),
+      autocorrect: true,
+      textInputAction: TextInputAction.next,
+      keyboardType: keyboardType,
+      keyboardAppearance: Brightness.light,
+      validator: (value) => value?.isNotEmpty == true ? null : 'Can\'t be null',
     );
   }
 }
